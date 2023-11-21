@@ -21,6 +21,7 @@ INFO = {
     'client_x509_cert_url': settings.client_x509_cert_url
 }
 
+
 cred = ServiceAccountCreds(scopes=SCOPES, **INFO)
 
 
