@@ -3,10 +3,8 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
-from constants import (
-    FULL_AMOUNT_GT, DON_COMMENT_MIN_LEN,
-    INVESTED_AMOUNT_DEFAULT, CREATE_DATE,
-)
+from constants import (CREATE_DATE, DON_COMMENT_MIN_LEN, FULL_AMOUNT_GT,
+                       INVESTED_AMOUNT_DEFAULT)
 
 
 class DonationCreate(BaseModel):
