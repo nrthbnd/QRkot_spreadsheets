@@ -1,30 +1,25 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.validators import (
-    check_before_delete_project,
-    check_before_update,
-    check_charity_project_exists,
-    check_full_amount_before_update,
-    check_name_duplicate,
-)
+from app.api.validators import (check_before_delete_project,
+                                check_before_update,
+                                check_charity_project_exists,
+                                check_full_amount_before_update,
+                                check_name_duplicate)
 from app.core.db import get_async_session
 from app.core.user import current_superuser
 from app.crud.charityproject import charity_project_crud
 from app.crud.donation import donation_crud
-from app.schemas.charityproject import (
-    CharityProjectCreate,
-    CharityProjectDB,
-    CharityProjectUpdate,
-)
+from app.schemas.charityproject import (CharityProjectCreate, CharityProjectDB,
+                                        CharityProjectUpdate)
 from app.services.investment_process import investition
-
+from constants import ROUTE_CLEAR, ROUTE_PROJECT_ID
 
 router = APIRouter()
 
 
 @router.post(
-    '/',
+    ROUTE_CLEAR,
     response_model=CharityProjectDB,
     dependencies=[Depends(current_superuser)],
     response_model_exclude_none=True,
@@ -46,7 +41,7 @@ async def create_new_project(
 
 
 @router.patch(
-    '/{charity_project_id}',
+    ROUTE_PROJECT_ID,
     response_model=CharityProjectDB,
     dependencies=[Depends(current_superuser)],
 )
@@ -76,7 +71,7 @@ async def partially_update_project(
 
 
 @router.delete(
-    '/{charity_project_id}',
+    ROUTE_PROJECT_ID,
     response_model=CharityProjectDB,
     dependencies=[Depends(current_superuser)],
 )
@@ -96,7 +91,7 @@ async def remove_charity_project(
 
 
 @router.get(
-    '/',
+    ROUTE_CLEAR,
     response_model=list[CharityProjectDB],
     response_model_exclude_none=True,
 )
