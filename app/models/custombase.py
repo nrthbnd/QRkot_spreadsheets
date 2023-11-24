@@ -1,12 +1,8 @@
 from sqlalchemy import Boolean, Column, DateTime, Integer
 
-from constants import (
-    INVESTED_AMOUNT_DEFAULT,
-    FULLY_INVESTED_DEFAULT,
-    CREATE_DATE_DEFAULT,
-    CLOSE_DATE_DEFAULT,
-)
 from app.core.db import Base
+from constants import (CLOSE_DATE_DEFAULT, CREATE_DATE_DEFAULT,
+                       FULLY_INVESTED_DEFAULT, INVESTED_AMOUNT_DEFAULT)
 
 
 class CustomBase(Base):
