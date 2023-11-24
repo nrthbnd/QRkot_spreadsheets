@@ -1,14 +1,11 @@
 from fastapi import APIRouter
 
-from constants import (
-    CHARITY_PROJECT_ROUTER_PREFIX, CHARITY_PROJECT_ROUTER_TAG,
-    DONATION_ROUTER_PREFIX, DONATION_ROUTER_TAG,
-    GOOGLE_ROUTER_PREFIX, GOOGLE_ROUTER_TAG,
-)
-from app.api.endpoints import (
-    google_api_router, charity_project_router, donation_router, user_router,
-)
-
+from app.api.endpoints import (charity_project_router, donation_router,
+                               google_api_router, user_router)
+from constants import (CHARITY_PROJECT_ROUTER_PREFIX,
+                       CHARITY_PROJECT_ROUTER_TAG, DONATION_ROUTER_PREFIX,
+                       DONATION_ROUTER_TAG, GOOGLE_ROUTER_PREFIX,
+                       GOOGLE_ROUTER_TAG)
 
 main_router = APIRouter()
 
