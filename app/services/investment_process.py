@@ -1,7 +1,8 @@
 from datetime import datetime
 
-from app.models import CharityProject, Donation
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.models import CharityProject, Donation
 
 
 async def donation_amount(
