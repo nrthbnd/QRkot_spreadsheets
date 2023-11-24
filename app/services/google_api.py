@@ -1,19 +1,18 @@
 from datetime import datetime
 
 from aiogoogle import Aiogoogle
-from app.core.config import settings
 from sqlalchemy import func
 
-from constants import (
-    FORMAT, GOOGLE_SHEETS_OBG, GOOGLE_SHEETS_VERSION,
-    PROP_TITLE, PROP_LOCALE, SHEET_TYPE, SHEET_ID,
-    SHEET_TITLE, ROW_COUNT, COLUMN_COUNT, SPREADSHEET_ID,
-    PERMISSION_TYPE, PERMISSION_ROLE,
-    GOOGLE_DRIVE_OBJ, GOOGLE_DRIVE_VERSION, PERMISSION_FIELD,
-    TABLE_VALUE_DESC, TABLE_VALUE_COL_1, TABLE_VALUE_COL_2, TABLE_VALUE_COL_3,
-    MAJOR_DIMENSION, VALUES_RANGE, VALUE_INPUT_OPTION,
-    NAME_LABEL, DESCRIPTION_LABEL, COLLECTION_TIME_LABEL,
-)
+from app.core.config import settings
+from constants import (COLLECTION_TIME_LABEL, COLUMN_COUNT, DESCRIPTION_LABEL,
+                       FORMAT, GOOGLE_DRIVE_OBJ, GOOGLE_DRIVE_VERSION,
+                       GOOGLE_SHEETS_OBG, GOOGLE_SHEETS_VERSION,
+                       MAJOR_DIMENSION, NAME_LABEL, PERMISSION_FIELD,
+                       PERMISSION_ROLE, PERMISSION_TYPE, PROP_LOCALE,
+                       PROP_TITLE, ROW_COUNT, SHEET_ID, SHEET_TITLE,
+                       SHEET_TYPE, SPREADSHEET_ID, TABLE_VALUE_COL_1,
+                       TABLE_VALUE_COL_2, TABLE_VALUE_COL_3, TABLE_VALUE_DESC,
+                       VALUE_INPUT_OPTION, VALUES_RANGE)
 
 
 async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
@@ -21,7 +20,7 @@ async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
     now_date_time = datetime.now().strftime(FORMAT)
     service = await wrapper_services.discover(
         GOOGLE_SHEETS_OBG,
-        GOOGLE_SHEETS_VERSION
+        GOOGLE_SHEETS_VERSION,
     )
     spreadsheet_body = {
         'properties': {'title': PROP_TITLE + now_date_time,
@@ -39,12 +38,11 @@ async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
     response = await wrapper_services.as_service_account(
         service.spreadsheets.create(json=spreadsheet_body)
     )
-    spreadsheetid = response[SPREADSHEET_ID]
-    return spreadsheetid
+    return response[SPREADSHEET_ID]
 
 
 async def set_user_permissions(
-        spreadsheetid: str,
+        spreadsheet_id: str,
         wrapper_services: Aiogoogle,
 ) -> None:
     """Предоставить права доступа."""
@@ -59,7 +57,7 @@ async def set_user_permissions(
     )
     await wrapper_services.as_service_account(
         service.permissions.create(
-            fileId=spreadsheetid,
+            fileId=spreadsheet_id,
             json=permissions_body,
             fields=PERMISSION_FIELD,
         )
@@ -67,7 +65,7 @@ async def set_user_permissions(
 
 
 async def spreadsheets_update_value(
-        spreadsheetid: str,
+        spreadsheet_id: str,
         charity_projects: list[dict],
         wrapper_services: Aiogoogle,
 ) -> None:
@@ -98,7 +96,7 @@ async def spreadsheets_update_value(
     }
     await wrapper_services.as_service_account(
         service.spreadsheets.values.update(
-            spreadsheetId=spreadsheetid,
+            spreadsheetId=spreadsheet_id,
             range=VALUES_RANGE.format(len(table_values)),
             valueInputOption=VALUE_INPUT_OPTION,
             json=update_body,
