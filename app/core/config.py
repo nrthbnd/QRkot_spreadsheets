@@ -2,9 +2,7 @@ from typing import Optional
 
 from pydantic import BaseSettings, EmailStr
 
-from constants import (
-    APP_TITLE, DATABASE_URL, SECRET, ENV_FILE_NAME,
-)
+from constants import APP_TITLE, DATABASE_URL, ENV_FILE_NAME, SECRET
 
 
 class Settings(BaseSettings):
@@ -15,7 +13,7 @@ class Settings(BaseSettings):
 
     first_superuser_email: Optional[EmailStr] = None
     first_superuser_password: Optional[str] = None
-    # Переменные для Google API
+
     type: Optional[str] = None
     project_id: Optional[str] = None
     private_key_id: Optional[str] = None
