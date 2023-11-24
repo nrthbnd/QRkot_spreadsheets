@@ -3,11 +3,8 @@ from typing import Optional
 
 from pydantic import BaseModel, Extra, Field, validator
 
-from constants import (
-    PR_NAME_MIN_LEN, PR_NAME_MAX_LEN,
-    PR_DESC_MIN_LEN, FULL_AMOUNT_GT,
-    CREATE_DATE, INVESTED_AMOUNT_DEFAULT,
-)
+from constants import (CREATE_DATE, FULL_AMOUNT_GT, INVESTED_AMOUNT_DEFAULT,
+                       PR_DESC_MIN_LEN, PR_NAME_MAX_LEN, PR_NAME_MIN_LEN)
 
 
 class CharityProjectBase(BaseModel):
