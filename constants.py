@@ -88,3 +88,8 @@ USERS_TAG = 'users'
 DELETE_ROUTE = '/users/{id}'
 DELETE_TAG = 'users'
 DELETE_USER_EXCEPTION = 'Удаление пользователей запрещено!'
+
+# api/endpoints/charityproject, donation, google_api
+ROUTE_CLEAR = '/'
+ROUTE_PROJECT_ID = '/{charity_project_id}'
+ROUTE_MY = '/my'
