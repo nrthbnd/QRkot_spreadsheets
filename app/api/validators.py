@@ -1,13 +1,11 @@
 from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from constants import (
-    NAME_DUPLICATE_EXCEPTION, PROJECT_NOT_EXISTS_EXCEPTION,
-    CLOSED_PROJECT_EXCEPTION, FULL_AMOUNT_EXCEPTION,
-    DELETE_PROJECT_EXCEPTION, NOT_INVESTED_YET,
-)
 from app.crud.charityproject import charity_project_crud
 from app.models import CharityProject
+from constants import (CLOSED_PROJECT_EXCEPTION, DELETE_PROJECT_EXCEPTION,
+                       FULL_AMOUNT_EXCEPTION, NAME_DUPLICATE_EXCEPTION,
+                       NOT_INVESTED_YET, PROJECT_NOT_EXISTS_EXCEPTION)
 
 
 async def check_name_duplicate(
