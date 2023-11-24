@@ -1,17 +1,15 @@
-from fastapi.encoders import jsonable_encoder
 from typing import Optional
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import func
 
-from constants import (
-    COLLECTION_TIME_FORMAT, WAS_FULLY_INVESTED,
-    NAME_LABEL, DESCRIPTION_LABEL, COLLECTION_TIME_LABEL,
-)
+from fastapi.encoders import jsonable_encoder
+from sqlalchemy import func, select
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.crud.base import CRUDBase
 from app.models import CharityProject
-from app.services.google_api import calculate_collection_time
 from app.schemas.charityproject import CharityProjectUpdate
+from app.services.google_api import calculate_collection_time
+from constants import (COLLECTION_TIME_FORMAT, COLLECTION_TIME_LABEL,
+                       DESCRIPTION_LABEL, NAME_LABEL, WAS_FULLY_INVESTED)
 
 
 class CRUDCharityProject(CRUDBase):
